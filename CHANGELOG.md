@@ -1,4 +1,7 @@
 # Change Log
 
+### v0.2 (2014-08-04)
+- 不足していたファイルをGitに追加。
+
 ### v0.1 (2014-08-03)
-- Recipe was exhibited newly.
+- 公開。

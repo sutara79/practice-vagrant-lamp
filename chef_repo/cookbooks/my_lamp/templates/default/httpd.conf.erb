@@ -289,7 +289,7 @@ UseCanonicalName Off
 # documents. By default, all requests are taken from this directory, but
 # symbolic links and aliases may be used to point to other locations.
 #
-DocumentRoot "<%= node['httpd']['docroot'] %>"
+DocumentRoot "<%= @root %>"
 
 #
 # Each directory to which Apache has access can be configured with respect
@@ -314,7 +314,7 @@ DocumentRoot "<%= node['httpd']['docroot'] %>"
 #
 # This should be changed to whatever you set DocumentRoot to.
 #
-<Directory "<%= node['httpd']['docroot'] %>">
+<Directory "<%= @root %>">
 
 #
 # Possible values for the Options directive are "None", "All",
@@ -463,8 +463,7 @@ HostnameLookups Off
 # filesystem) can improve performance; for details, please see
 # http://httpd.apache.org/docs/2.2/mod/core.html#enablemmap
 #
-# (2014-08-02) 参照: http://www.seeds-std.co.jp/seedsblog/1227.html
-EnableMMAP off
+EnableMMAP <%= @enable_mmap %>
 
 #
 # EnableSendfile: Control whether the sendfile kernel support is 
@@ -473,8 +472,7 @@ EnableMMAP off
 # filesystems.  Please see
 # http://httpd.apache.org/docs/2.2/mod/core.html#enablesendfile
 #
-# (2014-08-02) 参照: http://www.seeds-std.co.jp/seedsblog/1227.html
-EnableSendfile off
+EnableSendfile <%= @enable_sendfile %>
 
 #
 # ErrorLog: The location of the error log file.

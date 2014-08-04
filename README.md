@@ -1,9 +1,11 @@
 # my_lamp for Chef-solo
+Chef-solo recipe to replace XAMPP.
 
 ## Environment
 ##### Virtual
 - CentOS 6.5 64bit
 - Apache 2.2
+  - DocumentRoot: /vagrant/public_html
 - MySQL 5.6
 - PHP 5.6
 

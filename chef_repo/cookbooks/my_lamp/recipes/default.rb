@@ -14,23 +14,16 @@
 # - PHP 5.6 
 
 # 変数
-conf_httpd = '/etc/httpd/conf/httpd.conf'
-conf_phpMyAdmin = '/etc/httpd/conf.d/phpMyAdmin.conf'
-conf_phpMyAdmin2 = '/etc/phpMyAdmin/config.inc.php'
+httpd_root = '/vagrant/public_html'
 
-# Attribute
-node.default['httpd']['docroot'] = '/vagrant/public_html'
-node.default['phpmyadmin']['auth_type'] = 'cookie'
-node.default['phpmyadmin']['AllowNoPassword'] = 'TRUE'
-node.default['phpmyadmin']['Allow_from'] = '192.168.33.'
-
-# iptables無効
+# iptables無効 (ファイアウォール)
+# なお、selinux(細かなアクセス制御)ははじめから無効になっているので特に操作する必要はない。
 service 'iptables' do
     action [:stop, :disable]
 end
 
 # 共有フォルダ内にApacheのドキュメントルートを置くため、ディレクトリを作成する
-directory node['httpd']['docroot'] do
+directory httpd_root do
   owner 'root'
   group 'root'
   action :create
@@ -63,29 +56,52 @@ end
   end
 end
 
-# 設定ファイルを読み込む
-# 共有フォルダのマウント後にhttpdを起動するための設定
+# 設定ファイル (共有フォルダのマウント後にhttpdを起動するため)
 cookbook_file '/etc/init/httpd.conf' do
   source 'httpd.conf'
   mode '0644'
 end
 
-# 設定ファイルをテンプレートから作成
-[conf_httpd, conf_phpMyAdmin, conf_phpMyAdmin2].each do |t|
-  template t do
-    owner 'root'
-    group 'root'
-    mode '0644'
-  end
+# 設定ファイル (httpd)
+template '/etc/httpd/conf/httpd.conf' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables(
+    :root => httpd_root,
+    :enable_mmap => 'Off',
+    :enable_sendfile => 'Off'
+  )
+  notifies :reload, 'service[httpd]'
+end
+
+# 設定ファイル (phpMyAdmin)
+template '/etc/httpd/conf.d/phpMyAdmin.conf' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables(
+    :allow_from => '192.168.33.'
+  )
+  notifies :reload, 'service[httpd]'
+end
+
+# 設定ファイル (phpMyAdmin その2)
+template '/etc/phpMyAdmin/config.inc.php' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables(
+    :auth_type => 'cookie',
+    :allow_no_password => 'TRUE'
+  )
+  notifies :reload, 'service[httpd]'
 end
 
 # Apacheの起動
 service 'httpd' do
   supports :status => true, :restart => true, :reload => true
   action [:enable, :start]
-  subscribes :restart, "template[#{conf_httpd}]"
-  subscribes :restart, "template[#{conf_phpMyAdmin}]"
-  subscribes :restart, "template[#{conf_phpMyAdmin2}]"
 end
 
 # MySQLの起動

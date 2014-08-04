@@ -38,7 +38,7 @@ $cfg['Servers'][$i]['controlpass']   = '';          // access to the "mysql/user
                                                     // The controluser is also
                                                     // used for all relational
                                                     // features (pmadb)
-$cfg['Servers'][$i]['auth_type']     = '<%= node['phpmyadmin']['auth_type'] %>';      // Authentication method (config, http or cookie based)?
+$cfg['Servers'][$i]['auth_type']     = '<%= @auth_type %>';      // Authentication method (config, http or cookie based)?
 $cfg['Servers'][$i]['user']          = '';          // MySQL user
 $cfg['Servers'][$i]['password']      = '';          // MySQL password (only needed
                                                     // with 'config' auth_type)
@@ -82,7 +82,7 @@ $cfg['Servers'][$i]['AllowDeny']['order']           // Host authentication order
 $cfg['Servers'][$i]['AllowDeny']['rules']           // Host authentication rules, leave blank for defaults
                                      = array();
 $cfg['Servers'][$i]['AllowNoPassword']              // Allow logins without a password. Do not change the FALSE
-                                     = <%= node['phpmyadmin']['AllowNoPassword'] %>;       // default unless you're running a passwordless MySQL server
+                                     = <%= @allow_no_password %>;       // default unless you're running a passwordless MySQL server
 $cfg['Servers'][$i]['designer_coords']              // Leave blank (default) for no Designer support, otherwise
                                      = '';          // set to suggested 'pma_designer_coords' if really needed
 $cfg['Servers'][$i]['bs_garbage_threshold']         // Blobstreaming: Recommented default value from upstream
