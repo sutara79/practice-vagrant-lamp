@@ -49,6 +49,16 @@ end
   end
 end
 
+# SSH公開鍵を作成
+username = 'vagrant'
+bash 'ssh-keygen' do
+  user username
+  code <<-EOC
+    ssh-keygen -t rsa -q -f /home/#{username}/.ssh/id_rsa -P ""
+  EOC
+  creates "/home/#{username}/.ssh/id_rsa.pub"
+end
+
 # npmでJSDocをインストール
 bash 'add_npm_jsdoc' do
   user 'root'
