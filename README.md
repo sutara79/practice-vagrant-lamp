@@ -8,12 +8,17 @@ Chef-solo recipe to replace XAMPP.
   - DocumentRoot: /vagrant/public_html
 - MySQL 5.6
 - PHP 5.6
+  - phpDocumnetor 2.6.1
+  - yaml 1.1.1
+- Node.js 0.10.29
+  - JSDoc 3.3.0-alpha9
+- Git 1.7.1
 
 ##### Host
-- OS: Windows7 64bit
-- VirtualBox: 4.3.12
-- Vagrant: 1.6.3
-- Chef-solo: 11.12.8-2
+- Windows7 64bit
+- VirtualBox 4.3.12
+- Vagrant 1.6.3
+- Chef-solo 11.14.2
 
 ## Author
 Yuusaku Miyazaki (toumin.m7@gmail.com)

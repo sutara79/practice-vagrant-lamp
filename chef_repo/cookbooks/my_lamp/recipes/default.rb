@@ -7,12 +7,6 @@
 # MIT license
 #
 
-# LAMP
-# - CentOS 6.5
-# - Apache 2.2
-# - MySQL 5.6
-# - PHP 5.6 
-
 # 変数
 httpd_root = '/vagrant/public_html'
 
@@ -35,7 +29,7 @@ bash 'add_repo_remi' do
   code <<-EOC
     rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
   EOC
-  creates 'remi.repo'
+  creates '/etc/yum.repos.d/remi.repo'
 end
 
 # レポジトリを追加 (MySQL用)
@@ -44,16 +38,43 @@ bash 'add_repo_mysql' do
   code <<-EOC
     rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
   EOC
-  creates 'mysql-community.repo'
+  creates '/etc/yum.repos.d/mysql-community.repo'
 end
 
-# Apache, PHPのインストール
-%w{httpd php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysql mysql-community-server phpmyadmin}.each do |p|
+# パッケージのインストール
+%w{git httpd libyaml libyaml-devel nodejs npm php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysql mysql-community-server phpmyadmin}.each do |p|
   package p do
-    #action :upgrade
     action :install
     options '--enablerepo=remi --enablerepo=remi-php56'
   end
+end
+
+# npmでJSDocをインストール
+bash 'add_npm_jsdoc' do
+  user 'root'
+  code <<-EOC
+    npm install -g jsdoc
+  EOC
+  creates '/usr/bin/jsdoc'
+end
+
+# PECLでYamlをインストール
+bash 'add_pear_phpDocumentor' do
+  user 'root'
+  code <<-EOC
+    pecl install yaml
+  EOC
+  creates '/usr/lib64/php/modules/yaml.so'
+end
+
+# PEARでphpDocumentorをインストール
+bash 'add_pear_phpDocumentor' do
+  user 'root'
+  code <<-EOC
+    pear channel-discover pear.phpdoc.org
+    pear install phpdoc/phpDocumentor
+  EOC
+  creates '/usr/bin/phpdoc'
 end
 
 # 設定ファイル (共有フォルダのマウント後にhttpdを起動するため)
@@ -71,6 +92,18 @@ template '/etc/httpd/conf/httpd.conf' do
     :root => httpd_root,
     :enable_mmap => 'Off',
     :enable_sendfile => 'Off'
+  )
+  notifies :reload, 'service[httpd]'
+end
+
+# 設定ファイル (php)
+template '/etc/php.ini' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables(
+    :timezone => 'Asia/Tokyo',
+    :ext_yaml => 'extension=yaml.so'
   )
   notifies :reload, 'service[httpd]'
 end
