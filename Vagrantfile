@@ -6,6 +6,10 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "centos65-x86_64-20140116"
   config.vm.network "private_network", ip: "192.168.33.10"
+
+  # 共有フォルダを変更する
+  config.vm.synced_folder "../../server", "/var/www/html"
+
   config.omnibus.chef_version = :latest
   config.vm.provision :chef_solo do |chef|
     chef.custom_config_path = "Vagrantfile.chef"

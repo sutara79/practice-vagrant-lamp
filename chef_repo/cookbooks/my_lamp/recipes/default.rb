@@ -7,20 +7,10 @@
 # MIT license
 #
 
-# 変数
-httpd_root = '/vagrant/public_html'
-
 # iptables無効 (ファイアウォール)
 # なお、selinux(細かなアクセス制御)ははじめから無効になっているので特に操作する必要はない。
 service 'iptables' do
     action [:stop, :disable]
-end
-
-# 共有フォルダ内にApacheのドキュメントルートを置くため、ディレクトリを作成する
-directory httpd_root do
-  owner 'root'
-  group 'root'
-  action :create
 end
 
 # レポジトリを追加 (PHP用)
@@ -99,7 +89,6 @@ template '/etc/httpd/conf/httpd.conf' do
   group 'root'
   mode '0644'
   variables(
-    :root => httpd_root,
     :enable_mmap => 'Off',
     :enable_sendfile => 'Off'
   )

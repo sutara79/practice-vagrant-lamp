@@ -289,7 +289,7 @@ UseCanonicalName Off
 # documents. By default, all requests are taken from this directory, but
 # symbolic links and aliases may be used to point to other locations.
 #
-DocumentRoot "<%= @root %>"
+DocumentRoot "/var/www/html"
 
 #
 # Each directory to which Apache has access can be configured with respect
@@ -314,7 +314,7 @@ DocumentRoot "<%= @root %>"
 #
 # This should be changed to whatever you set DocumentRoot to.
 #
-<Directory "<%= @root %>">
+<Directory "/var/www/html">
 
 #
 # Possible values for the Options directive are "None", "All",

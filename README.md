@@ -5,7 +5,6 @@ Chef-solo recipe to replace XAMPP.
 ##### Virtual
 - CentOS 6.5 64bit
 - Apache 2.2
-  - DocumentRoot: /vagrant/public_html
 - MySQL 5.6
 - PHP 5.6
   - phpDocumnetor 2.6.1
@@ -19,6 +18,12 @@ Chef-solo recipe to replace XAMPP.
 - VirtualBox 4.3.12
 - Vagrant 1.6.3
 - Chef-solo 11.14.2
+
+## Note
+ホスト、ゲスト双方の共有フォルダを変更しています。
+```ruby
+config.vm.synced_folder "../../server", "/var/www/html"
+```
 
 ## Author
 Yuusaku Miyazaki (toumin.m7@gmail.com)
