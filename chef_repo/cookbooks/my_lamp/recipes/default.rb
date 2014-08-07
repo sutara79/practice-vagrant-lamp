@@ -83,6 +83,12 @@ cookbook_file '/etc/init/httpd.conf' do
   mode '0644'
 end
 
+# 設定ファイル (Welcomeページの表示を阻止)
+cookbook_file '/etc/httpd/conf.d/welcome.conf' do
+  source 'welcome.conf'
+  mode '0644'
+end
+
 # 設定ファイル (httpd)
 template '/etc/httpd/conf/httpd.conf' do
   owner 'root'
