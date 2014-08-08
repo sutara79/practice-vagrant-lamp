@@ -31,43 +31,11 @@ bash 'add_repo_mysql' do
   creates '/etc/yum.repos.d/mysql-community.repo'
 end
 
-# パッケージ (Apache)
-package 'httpd' do
-  action :install
-end
-
-# パッケージ (PHP)
-%w{php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysql phpmyadmin}.each do |p|
+# パッケージのインストール
+%w{git httpd libyaml libyaml-devel nodejs npm php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysql mysql-community-server phpmyadmin}.each do |p|
   package p do
     action :install
     options '--enablerepo=remi --enablerepo=remi-php56'
-  end
-end
-
-# パッケージ (MySQL)
-package 'mysql-community-server' do
-  action :install
-  options '--enablerepo=mysql56-community'
-end
-
-# パッケージ (yaml)
-%w{libyaml libyaml-devel}.each do |p|
-  package p do
-    action :install
-  end
-end
-
-# パッケージ (Node.js, JSDoc)
-%w{nodejs npm}.each do |p|
-  package p do
-    action :install
-  end
-end
-
-# パッケージ (Phalcon)
-%w{git php-devel pcre-devel gcc make}.each do |p|
-  package p do
-    action :install
   end
 end
 
@@ -109,18 +77,6 @@ bash 'add_pear_phpDocumentor' do
   creates '/usr/bin/phpdoc'
 end
 
-# gitでcphalconをインストール
-bash 'add_git_cphalcon' do
-  user 'root'
-  code <<-EOC
-    cd /home/vagrant
-    git clone git://github.com/phalcon/cphalcon.git
-    cd cphalcon/build
-    ./install
-  EOC
-  creates '/usr/lib64/php/modules/phalcon.so'
-end
-
 # 設定ファイル (共有フォルダのマウント後にhttpdを起動するため)
 cookbook_file '/etc/init/httpd.conf' do
   source 'httpd.conf'
@@ -139,7 +95,6 @@ template '/etc/httpd/conf/httpd.conf' do
   group 'root'
   mode '0644'
   variables(
-    :allow_override => 'All', # for mod_rewrite
     :enable_mmap => 'Off',
     :enable_sendfile => 'Off'
   )
@@ -153,9 +108,7 @@ template '/etc/php.ini' do
   mode '0644'
   variables(
     :timezone => 'Asia/Tokyo',
-    :ext_pdo => 'extension=pdo.so', # for Phalcon
-    :ext_yaml => 'extension=yaml.so',
-    :ext_phalcon => 'extension=phalcon.so'
+    :ext_yaml => 'extension=yaml.so'
   )
   notifies :reload, 'service[httpd]'
 end
