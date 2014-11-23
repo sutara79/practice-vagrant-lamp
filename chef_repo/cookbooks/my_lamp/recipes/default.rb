@@ -65,7 +65,7 @@ end
 end
 
 # パッケージ (Phalcon)
-%w{git php-devel pcre-devel gcc make}.each do |p|
+%w{git pcre-devel gcc make}.each do |p|
   package p do
     action :install
   end
@@ -91,7 +91,7 @@ bash 'add_npm_jsdoc' do
 end
 
 # PECLでYamlをインストール
-bash 'add_pear_phpDocumentor' do
+bash 'add_pecl_yaml' do
   user 'root'
   code <<-EOC
     pecl install yaml

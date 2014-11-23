@@ -1,9 +1,11 @@
 # my_lamp for Chef-solo
-Chef-solo recipe to replace XAMPP.
+Chef-solo recipe to replace XAMPP.  
+Only for non-production environment.  
+**DO NOT** apply this cookbook to production environment.
 
 ## Environment
 ##### Virtual
-- CentOS 6.5 x86_64
+- [CentOS 6.5 x86_64](https://github.com/2creatives/vagrant-centos/releases/tag/v6.5.3)
 - Apache 2.2.15
 - MySQL 5.6.20
 - PHP 5.6.0RC3
