@@ -1,5 +1,8 @@
 # Change Log for my_lamp
 
+### v1.2.0 (2014-12-18)
+- "default.rb"を分割して整理した。
+
 ### v1.1.1 (2014-11-23)
 - Chefのcookbookの記述ミスを修正した。
 - PHPでのエラーを画面に表示するように"php.ini.erb"での設定を変更した。

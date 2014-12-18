@@ -6,21 +6,23 @@ Only for non-production environment.
 ## Environment
 ##### Virtual
 - [CentOS 6.5 x86_64](https://github.com/2creatives/vagrant-centos/releases/tag/v6.5.3)
-- Apache 2.2.15
-- MySQL 5.6.20
-- PHP 5.6.0RC3
-  - phpDocumnetor 2.6.1
-  - yaml 1.1.1
-  - Phalcon 1.3.2
-- Node.js 0.10.29
-  - JSDoc 3.3.0-alpha9
-- Git 1.7.1
+- Apache >= 2.2.0
+- MySQL >= 5.6.0
+- PHP >= 5.6.0
+  - Composer
+  - phpDocumnetor
+  - yaml
+  - Phalcon
+- Node.js
+  - JSDoc
+- Git 2.2.0
+- HerokuToolbelt
 
 ##### Host
 - Windows 7 64bit
-- VirtualBox 4.3.12
-- Vagrant 1.6.3
-- Chef-solo 11.14.2
+- VirtualBox
+- Vagrant
+- Chef-solo
 
 ## Note
 ホスト、ゲスト双方の共有フォルダを変更しています。
