@@ -10,12 +10,31 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 共有フォルダを変更する
   config.vm.synced_folder "../../server", "/var/www/html"
 
+  # vagrant-omnibusを導入する必要のない場合(Macなど)はコメントアウトする
   config.omnibus.chef_version = :latest
+
   config.vm.provision :chef_solo do |chef|
     chef.custom_config_path = "Vagrantfile.chef"
     chef.cookbooks_path = "chef_repo/cookbooks"
     chef.roles_path = "chef_repo/roles"
     chef.data_bags_path = "chef_repo/data_bags"
-    chef.run_list = "my_lamp"
+    chef.run_list = ["my_lamp"]
+    chef.json = {
+      :username => 'vagrant',
+      :git => {
+        :version => 'git-2.2.0',
+        :user => {
+          :email => 'toumin.m7@gmail.com',
+          :name => 'Yuusaku Miyazaki'
+        }
+      },
+      :php => {
+        :timezone => 'Asia/Tokyo',
+        :allow_from => '192.168.33.'
+      },
+      :ruby => {
+        :version => 'ruby-2.1.5'
+      }
+    }
   end
 end

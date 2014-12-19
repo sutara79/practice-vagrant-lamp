@@ -6,7 +6,7 @@
 # iptables無効 (ファイアウォール)
 # なお、selinux(細かなアクセス制御)ははじめから無効になっているので特に操作する必要はない。
 service 'iptables' do
-    action [:stop, :disable]
+  action [:stop, :disable]
 end
 
 # パッケージ (基本)
@@ -17,11 +17,10 @@ end
 end
 
 # SSH公開鍵を作成
-username = 'vagrant'
 bash 'ssh-keygen' do
-  user username
+  user node.username
   code <<-EOC
-    ssh-keygen -t rsa -q -f /home/#{username}/.ssh/id_rsa -P ""
+    ssh-keygen -t rsa -q -f /home/#{node.username}/.ssh/id_rsa -P ""
   EOC
-  creates "/home/#{username}/.ssh/id_rsa.pub"
+  creates "/home/#{node.username}/.ssh/id_rsa.pub"
 end

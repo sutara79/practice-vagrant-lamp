@@ -2,7 +2,7 @@
 # Cookbook Name:: my_lamp
 # Recipe:: php
 #
-# 依存: basic, httpd, git
+# dependency: libyaml, httpd, git
 
 # レポジトリを追加 (PHP用)
 bash 'add_repo_remi' do
@@ -14,7 +14,7 @@ bash 'add_repo_remi' do
 end
 
 # パッケージ (PHP5.6系)
-%w{php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysql phpmyadmin php-pgsql}.each do |p|
+%w{php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysql phpmyadmin}.each do |p|
   package p do
     action :install
     options '--enablerepo=remi --enablerepo=remi-php56'
@@ -26,7 +26,9 @@ bash 'add_composer' do
   user 'root'
   code <<-EOC
     curl -sS https://getcomposer.org/installer | php
+    mv composer.phar /usr/local/bin/composer
   EOC
+  creates "/usr/local/bin/composer/composer.phar"
 end
 
 # PECLでYamlをインストール
@@ -71,7 +73,7 @@ template '/etc/php.ini' do
   group 'root'
   mode '0644'
   variables(
-    :timezone => 'Asia/Tokyo',
+    :timezone => node.php.timezone,
     :ext_yaml => 'extension=yaml.so',
   )
   notifies :reload, 'service[httpd]'
@@ -83,7 +85,7 @@ template '/etc/httpd/conf.d/phpMyAdmin.conf' do
   group 'root'
   mode '0644'
   variables(
-    :allow_from => '192.168.33.'
+    :allow_from => node.php.allow_from
   )
   notifies :reload, 'service[httpd]'
 end

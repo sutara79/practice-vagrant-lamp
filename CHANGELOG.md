@@ -1,5 +1,9 @@
 # Change Log for my_lamp
 
+### v1.2.1 (2014-12-19)
+- Chefのレシピで使う主なattributeをVagrantfileで設定するようにした。
+- パッケージ"php-pgsql"を除外した。
+
 ### v1.2.0 (2014-12-18)
 - "default.rb"を分割して整理した。
 

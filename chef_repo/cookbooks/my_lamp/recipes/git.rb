@@ -11,15 +11,26 @@
 end
 
 # ソースからインストール (Git最新版)
-git_ver = 'git-2.2.0'
-bash 'install_git' do
+bash 'install-git' do
   user 'root'
   code <<-EOC
-    wget https://www.kernel.org/pub/software/scm/git/#{git_ver}.tar.gz
-    tar zxvf #{git_ver}.tar.gz
-    cd #{git_ver}
+    wget https://www.kernel.org/pub/software/scm/git/#{node.git.version}.tar.gz
+    tar zxvf #{node.git.version}.tar.gz
+    cd #{node.git.version}
     ./configure –-prefix=/usr/local/ --with-curl --with-expat
     make prefix=/usr/local all
     make prefix=/usr/local install
   EOC
+  creates "/#{node.git.version}"
+end
+
+# 設定ファイル (.gitconfig)
+template "/home/#{node.username}/.gitconfig" do
+  owner node.username
+  group node.username
+  mode '0644'
+  variables(
+    :email => node.git.user.email,
+    :name => node.git.user.name
+  )
 end

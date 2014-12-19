@@ -2,20 +2,21 @@
 # Cookbook Name:: my_lamp
 # Recipe:: ruby
 #
-# 依存: basic
+# dependency: make, wget
 
 # Rubyをインストール
-ruby_ver = 'ruby-2.1.5'
 bash 'add_ruby' do
   user 'root'
   code <<-EOC
-    wget ftp://ftp.ruby-lang.org/pub/ruby/#{ruby_ver}.tar.gz
-    tar xvzf #{ruby_ver}.tar.gz
-    cd #{ruby_ver}
+    wget ftp://ftp.ruby-lang.org/pub/ruby/#{node.ruby.version}.tar.gz
+    tar xvzf #{node.ruby.version}.tar.gz
+    cd #{node.ruby.version}
     ./configure
     make
     make install
+    gem install foreman
   EOC
+  creates "/#{node.ruby.version}"
 end
 
 # Heroku Toolbeltをインストール
@@ -28,4 +29,5 @@ bash 'add_heroku_toolbelt' do
     source /etc/profile
     sh install.sh
   EOC
+  creates "/usr/local/heroku"
 end
