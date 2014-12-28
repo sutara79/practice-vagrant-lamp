@@ -1,5 +1,8 @@
 # Change Log for my_lamp
 
+### v1.3.0 (2014-12-28)
+- MySQLにテーブルをインポートするようにした。
+
 ### v1.2.1 (2014-12-19)
 - Chefのレシピで使う主なattributeをVagrantfileで設定するようにした。
 - パッケージ"php-pgsql"を除外した。

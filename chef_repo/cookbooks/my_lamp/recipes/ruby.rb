@@ -5,7 +5,7 @@
 # dependency: make, wget
 
 # Rubyをインストール
-bash 'add_ruby' do
+bash 'add-ruby' do
   user 'root'
   code <<-EOC
     wget ftp://ftp.ruby-lang.org/pub/ruby/#{node.ruby.version}.tar.gz
@@ -16,11 +16,11 @@ bash 'add_ruby' do
     make install
     gem install foreman
   EOC
-  creates "/#{node.ruby.version}"
+  not_if 'which ruby'
 end
 
 # Heroku Toolbeltをインストール
-bash 'add_heroku_toolbelt' do
+bash 'add-heroku-toolbelt' do
   user 'root'
   code <<-EOC
     wget -x https://toolbelt.heroku.com/install.sh
@@ -29,5 +29,5 @@ bash 'add_heroku_toolbelt' do
     source /etc/profile
     sh install.sh
   EOC
-  creates "/usr/local/heroku"
+  not_if 'which heroku'
 end

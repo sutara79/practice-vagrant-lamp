@@ -6,17 +6,18 @@ Only for non-production environment.
 ## Environment
 ##### Virtual
 - [CentOS 6.5 x86_64](https://github.com/2creatives/vagrant-centos/releases/tag/v6.5.3)
-- Apache >= 2.2.0
-- MySQL >= 5.6.0
-- PHP >= 5.6.0
-  - Composer
-  - phpDocumnetor
-  - yaml
-  - Phalcon
-- Node.js
-  - JSDoc
-- Git 2.2.0
-- HerokuToolbelt
+- Apache (centos)
+- MySQL (mysql56-community)
+- PHP (remi-php56)
+  - Composer (公式サイトのインストーラ)
+  - phpDocumnetor (pear)
+  - yaml (pecl)
+  - Phalcon (ソース)
+- Node.js (epel)
+  - JSDoc (npm)
+- Git (ソース)
+- Ruby (ソース)
+  - HerokuToolbelt (公式サイトのインストーラ)
 
 ##### Host
 - Windows 7 64bit

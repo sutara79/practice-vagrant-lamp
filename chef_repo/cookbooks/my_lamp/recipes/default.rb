@@ -7,13 +7,13 @@
 # MIT license
 #
 
-include_recipe "my_lamp::basic"
-include_recipe "my_lamp::git"
-include_recipe "my_lamp::httpd"
-include_recipe "my_lamp::php"
-include_recipe "my_lamp::mysql"
-include_recipe "my_lamp::nodejs"
-include_recipe "my_lamp::ruby"
+include_recipe 'my_lamp::basic'
+include_recipe 'my_lamp::git'
+include_recipe 'my_lamp::httpd'
+include_recipe 'my_lamp::php'
+include_recipe 'my_lamp::mysql'
+include_recipe 'my_lamp::nodejs'
+include_recipe 'my_lamp::ruby'
 
 # Apacheの起動
 service 'httpd' do

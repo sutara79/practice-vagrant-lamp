@@ -5,7 +5,7 @@
 # dependency: libyaml, httpd, git
 
 # レポジトリを追加 (PHP用)
-bash 'add_repo_remi' do
+bash 'add-repo-remi' do
   user 'root'
   code <<-EOC
     rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
@@ -22,17 +22,17 @@ end
 end
 
 # Composerをインストール
-bash 'add_composer' do
+bash 'add-composer' do
   user 'root'
   code <<-EOC
     curl -sS https://getcomposer.org/installer | php
     mv composer.phar /usr/local/bin/composer
   EOC
-  creates "/usr/local/bin/composer/composer.phar"
+  not_if 'which composer'
 end
 
 # PECLでYamlをインストール
-bash 'add_pecl_yaml' do
+bash 'add-pecl-yaml' do
   user 'root'
   code <<-EOC
     pecl install yaml
@@ -41,13 +41,13 @@ bash 'add_pecl_yaml' do
 end
 
 # PEARでphpDocumentorをインストール
-bash 'add_pear_phpDocumentor' do
+bash 'add-pear-phpDocumentor' do
   user 'root'
   code <<-EOC
     pear channel-discover pear.phpdoc.org
     pear install phpdoc/phpDocumentor
   EOC
-  creates '/usr/bin/phpdoc'
+  not_if 'which phpdoc'
 end
 
 # パッケージ (Phalcon用: pcre-devel)
@@ -56,7 +56,7 @@ package 'pcre-devel' do
 end
 
 # gitでcphalconをインストール
-bash 'add_cphalcon' do
+bash 'add-cphalcon' do
   user 'root'
   code <<-EOC
     cd /home/vagrant
