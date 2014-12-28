@@ -16,7 +16,7 @@ end
 # パッケージ (PHP5.6系)
 %w{php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysql phpmyadmin}.each do |p|
   package p do
-    action :install
+    action :upgrade
     options '--enablerepo=remi --enablerepo=remi-php56'
   end
 end
@@ -52,7 +52,7 @@ end
 
 # パッケージ (Phalcon用: pcre-devel)
 package 'pcre-devel' do
-  action :install
+  action :upgrade
 end
 
 # gitでcphalconをインストール

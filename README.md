@@ -9,15 +9,15 @@ Only for non-production environment.
 - Apache (centos)
 - MySQL (mysql56-community)
 - PHP (remi-php56)
-  - Composer (公式サイトのインストーラ)
-  - phpDocumnetor (pear)
-  - yaml (pecl)
-  - Phalcon (ソース)
+  - Composer
+  - phpDocumnetor
+  - yaml
+  - Phalcon
 - Node.js (epel)
-  - JSDoc (npm)
+  - JSDoc
 - Git (ソース)
 - Ruby (ソース)
-  - HerokuToolbelt (公式サイトのインストーラ)
+  - HerokuToolbelt
 
 ##### Host
 - Windows 7 64bit

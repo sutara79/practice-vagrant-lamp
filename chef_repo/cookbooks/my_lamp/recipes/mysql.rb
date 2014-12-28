@@ -16,7 +16,7 @@ end
 # パッケージ (MySQL)
 # 参照: http://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/
 package 'mysql-community-server' do
-  action :install
+  action :upgrade
   options '--enablerepo=mysql56-community'
 end
 
