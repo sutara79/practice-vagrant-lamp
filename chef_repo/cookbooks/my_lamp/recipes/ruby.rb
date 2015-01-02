@@ -16,7 +16,8 @@ bash 'add-ruby' do
     make install
     gem install foreman
   EOC
-  not_if 'which ruby'
+  # not_if 'which ruby' # なぜかRubyをインストールできなかった
+  creates "/#{node.ruby.version}"
 end
 
 # Heroku Toolbeltをインストール

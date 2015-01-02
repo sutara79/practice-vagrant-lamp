@@ -16,5 +16,5 @@ bash 'add_jsdoc' do
   code <<-EOC
     npm install -g jsdoc
   EOC
-  creates '/usr/bin/jsdoc'
+  not_if 'which jsdoc'
 end

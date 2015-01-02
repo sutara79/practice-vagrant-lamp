@@ -47,13 +47,25 @@ bash 'install-git' do
   not_if 'which git'
 end
 
-# 設定ファイル (.gitconfig)
-template "/home/#{node.username}/.gitconfig" do
-  owner node.username
-  group node.username
-  mode '0644'
-  variables(
-    :email => node.git.user.email,
-    :name => node.git.user.name
-  )
+# ソースからインストール (Git最新版)
+# 参照: http://tetsuwo.tumblr.com/post/36066698390/git-chmod-git-config
+bash 'setting-git' do
+  user node.username
+  code <<-EOC
+    git config --global user.name "#{node.git.user.name}"
+    git config --global user.email "#{node.git.user.email}"
+    git config core.filemode false
+  EOC
+  creates "/home/#{node.username}/.gitconfig"
 end
+
+# # 設定ファイル (.gitconfig)
+# template "/home/#{node.username}/.gitconfig" do
+#   owner node.username
+#   group node.username
+#   mode '0644'
+#   variables(
+#     :email => node.git.user.email,
+#     :name => node.git.user.name
+#   )
+# end

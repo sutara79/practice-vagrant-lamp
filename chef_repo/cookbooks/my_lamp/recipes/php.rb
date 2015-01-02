@@ -14,7 +14,7 @@ bash 'add-repo-remi' do
 end
 
 # パッケージ (PHP5.6系)
-%w{php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysql phpmyadmin}.each do |p|
+%w{php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysqlnd phpmyadmin php-pgsql}.each do |p|
   package p do
     action :upgrade
     options '--enablerepo=remi --enablerepo=remi-php56'

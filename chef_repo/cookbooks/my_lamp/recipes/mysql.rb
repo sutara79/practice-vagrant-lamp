@@ -25,7 +25,7 @@ bash 'add-database' do
   user 'root'
   code <<-EOC
     mysqladmin -uroot create test
-    mysql -uroot test < /var/www/html/PHP_test/ajax-combobox/sample/sample_mysql.sql
+    mysql -uroot test < /var/www/html/php/ajax-combobox/sample/sample_mysql.sql
   EOC
   not_if 'mysqlshow | grep -q test'
   only_if {node.git.user.email == 'toumin.m7@gmail.com'}

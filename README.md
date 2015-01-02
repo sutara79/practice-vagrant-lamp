@@ -8,6 +8,7 @@ Only for non-production environment.
 - [CentOS 6.5 x86_64](https://github.com/2creatives/vagrant-centos/releases/tag/v6.5.3)
 - Apache (centos)
 - MySQL (mysql56-community)
+- PostgreSQL (pgdg94)
 - PHP (remi-php56)
   - Composer
   - phpDocumnetor
