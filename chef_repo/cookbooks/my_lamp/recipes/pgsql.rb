@@ -29,6 +29,12 @@ bash 'init-pgsql' do
   creates '/var/lib/pgsql/9.4/data/postgresql.conf'
 end
 
+# 起動
+service 'postgresql-9.4' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
 # インポート
 bash 'import-pgsql' do
   user 'postgres'
@@ -36,12 +42,7 @@ bash 'import-pgsql' do
     createdb test
     psql test < /var/www/html/heroku/sutara-php/outfile.sql
   EOC
-  not_if 'psql -c "\l" | grep -q test'
+  #TODO: 既にインポート済みでも実行されてしまう。
+  not_if 'psql -c "\l" | grep test'
   only_if {node.git.user.email == 'toumin.m7@gmail.com'}
-end
-
-# 起動
-service 'postgresql-9.4' do
-  supports :status => true, :restart => true, :reload => true
-  action [:enable, :start]
 end

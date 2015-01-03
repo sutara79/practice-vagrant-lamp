@@ -20,6 +20,12 @@ package 'mysql-community-server' do
   options '--enablerepo=mysql56-community'
 end
 
+# 起動
+service 'mysqld' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
 # (自分専用)データベースを登録
 bash 'add-database' do
   user 'root'
@@ -27,12 +33,6 @@ bash 'add-database' do
     mysqladmin -uroot create test
     mysql -uroot test < /var/www/html/php/ajax-combobox/sample/sample_mysql.sql
   EOC
-  not_if 'mysqlshow | grep -q test'
+  not_if 'mysqlshow | grep test'
   only_if {node.git.user.email == 'toumin.m7@gmail.com'}
-end
-
-# MySQLの起動
-service 'mysqld' do
-  supports :status => true, :restart => true, :reload => true
-  action [:enable, :start]
 end
