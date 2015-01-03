@@ -39,3 +39,9 @@ bash 'import-pgsql' do
   not_if 'psql -c "\l" | grep -q test'
   only_if {node.git.user.email == 'toumin.m7@gmail.com'}
 end
+
+# 起動
+service 'postgresql-9.4' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end

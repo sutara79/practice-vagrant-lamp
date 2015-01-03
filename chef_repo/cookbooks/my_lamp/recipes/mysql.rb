@@ -30,3 +30,9 @@ bash 'add-database' do
   not_if 'mysqlshow | grep -q test'
   only_if {node.git.user.email == 'toumin.m7@gmail.com'}
 end
+
+# MySQLの起動
+service 'mysqld' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end

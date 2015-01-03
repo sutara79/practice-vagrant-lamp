@@ -32,3 +32,9 @@ template '/etc/httpd/conf/httpd.conf' do
   )
   notifies :reload, 'service[httpd]'
 end
+
+# Apacheの起動
+service 'httpd' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
