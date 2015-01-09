@@ -14,7 +14,8 @@ bash 'add-repo-remi' do
 end
 
 # パッケージ (PHP5.6系)
-%w{php php-common php-mbstring php-xml php-devel php-process php-cli php-pear php-mysqlnd phpmyadmin php-pgsql}.each do |p|
+# php-fpm: foremanの実行に必要
+%w{php php-common php-cli php-mbstring php-xml php-fpm php-devel php-process php-pear php-mysqlnd phpmyadmin php-pgsql}.each do |p|
   package p do
     action :upgrade
     options '--enablerepo=remi --enablerepo=remi-php56'

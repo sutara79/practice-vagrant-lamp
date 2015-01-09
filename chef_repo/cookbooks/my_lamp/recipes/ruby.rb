@@ -14,7 +14,6 @@ bash 'add-ruby' do
     ./configure
     make
     make install
-    gem install foreman
   EOC
   # not_if 'which ruby' # なぜかRubyをインストールできなかった
   creates "/#{node.ruby.version}"
@@ -29,6 +28,7 @@ bash 'add-heroku-toolbelt' do
     echo 'PATH="/usr/local/heroku/bin:$PATH"' >> /etc/profile
     source /etc/profile
     sh install.sh
+    gem install foreman
   EOC
   not_if 'which heroku'
 end
