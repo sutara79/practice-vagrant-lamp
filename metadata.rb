@@ -1,4 +1,4 @@
-name             File.basename(Dir::pwd)
+name             'vm1'
 maintainer       'Yuusaku Miyazaki'
 maintainer_email 'toumin.m7@gmail.com'
 license          'All rights reserved'
