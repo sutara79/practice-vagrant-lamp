@@ -14,11 +14,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
 
   config.vm.provision :chef_solo do |chef|
-    chef.custom_config_path = 'Vagrantfile.chef'
-    chef.cookbooks_path = 'chef_repo/cookbooks'
-    chef.roles_path = 'chef_repo/roles'
-    chef.data_bags_path = 'chef_repo/data_bags'
-    chef.run_list = ['my_lamp']
+    #TODO: 削除
+    # chef.custom_config_path = 'Vagrantfile.chef'
+
+    chef.cookbooks_path = '../'
+    chef.run_list = "recipe[#{File.basename(Dir::pwd)}::default]"
+    # chef.cookbooks_path = 'chef_repo/cookbooks'
+    # chef.run_list = ['my_lamp']
+
     chef.json = {
       :username => 'vagrant',
       :git => {
