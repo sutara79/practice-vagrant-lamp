@@ -1,6 +1,0 @@
-name             'vm1'
-maintainer       'Yuusaku Miyazaki'
-maintainer_email 'toumin.m7@gmail.com'
-license          'All rights reserved'
-description      'my lamp'
-version          '1.4.0'
