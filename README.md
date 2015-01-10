@@ -4,7 +4,7 @@ Only for non-production environment.
 **DO NOT** apply this cookbook to production environment.
 
 ## Environment
-##### Virtual
+##### Virtual Machine
 - [CentOS 6.5 x86_64](https://github.com/2creatives/vagrant-centos/releases/tag/v6.5.3)
 - Apache (centos)
 - MySQL (mysql56-community)
@@ -20,7 +20,7 @@ Only for non-production environment.
 - Ruby (ソース)
   - HerokuToolbelt
 
-##### Host
+##### Host Machine
 - Windows 7 64bit
 - VirtualBox
 - Vagrant
