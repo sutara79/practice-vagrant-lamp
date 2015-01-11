@@ -1,4 +1,4 @@
-# my_lamp for Chef-solo
+# practice-vagrant-lamp
 Chef-solo recipe to replace XAMPP.  
 Only for non-production environment.  
 **DO NOT** apply this cookbook to production environment.
@@ -24,7 +24,7 @@ Only for non-production environment.
 - Windows 7 64bit
 - VirtualBox
 - Vagrant
-- Chef-solo
+- Chef-solo >= 12.0
 
 ## Note
 ホスト、ゲスト双方の共有フォルダを変更しています。

@@ -8,7 +8,6 @@
 #
 
 include_recipe "#{cookbook_name}::basic"
-include_recipe "#{cookbook_name}::git"
 include_recipe "#{cookbook_name}::httpd"
 include_recipe "#{cookbook_name}::mysql"
 include_recipe "#{cookbook_name}::pgsql"
