@@ -24,13 +24,8 @@ Only for non-production environment.
 - Windows 7 64bit
 - VirtualBox
 - Vagrant
+  - **DO NOT install plugin**: vagrant-berkshelf, vagrant-omnibus
 - chef-client >= 12.0
-
-## Note
-ホスト、ゲスト双方の共有フォルダを変更しています。
-```ruby
-config.vm.synced_folder "../../server", "/var/www/html"
-```
 
 ## Author
 Yuusaku Miyazaki (toumin.m7@gmail.com)

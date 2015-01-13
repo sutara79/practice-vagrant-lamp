@@ -1,12 +1,3 @@
-#
-# Cookbook Name:: my_lamp
-# Recipe:: default
-#
-# Copyright 2014, Yuusaku Miyazaki <toumin.m7@gmail.com>
-#
-# MIT license
-#
-
 include_recipe "#{cookbook_name}::basic"
 include_recipe "#{cookbook_name}::httpd"
 include_recipe "#{cookbook_name}::mysql"
