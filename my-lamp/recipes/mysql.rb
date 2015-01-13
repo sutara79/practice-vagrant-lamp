@@ -1,8 +1,3 @@
-#
-# Cookbook Name:: my_lamp
-# Recipe:: mysql
-#
-
 # レポジトリを追加 (MySQL用)
 # 参照: http://dev.mysql.com/downloads/repo/yum/
 bash 'add-repo-mysql' do
@@ -26,7 +21,7 @@ service 'mysqld' do
   action [:enable, :start]
 end
 
-# (自分専用)データベースを登録
+# インポート
 bash 'add-database' do
   user 'root'
   code <<-EOC
@@ -34,5 +29,4 @@ bash 'add-database' do
     mysql -uroot test < /var/www/html/php/ajax-combobox/sample/sample_mysql.sql
   EOC
   not_if 'mysqlshow | grep test'
-  only_if {node.git.user.email == 'toumin.m7@gmail.com'}
 end

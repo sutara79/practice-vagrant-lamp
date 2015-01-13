@@ -1,8 +1,3 @@
-#
-# Cookbook Name:: my_lamp
-# Recipe:: nodejs
-#
-
 # パッケージ (Node.js, JSDoc)
 %w{nodejs npm}.each do |p|
   package p do

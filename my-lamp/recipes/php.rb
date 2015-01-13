@@ -1,7 +1,3 @@
-#
-# Cookbook Name:: my_lamp
-# Recipe:: php
-#
 # dependency: libyaml, httpd, git
 
 # レポジトリを追加 (PHP用)

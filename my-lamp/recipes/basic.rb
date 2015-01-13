@@ -7,7 +7,7 @@ end
 # パッケージ (基本)
 # mlocate 管理作業用
 # lsof 管理作業用
-%w{wget gcc make libyaml libyaml-devel mlocate lsof}.each do |p|
+%w{wget libyaml libyaml-devel mlocate lsof}.each do |p|
   package p do
     action :install
   end

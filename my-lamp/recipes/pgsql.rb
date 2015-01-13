@@ -1,8 +1,3 @@
-#
-# Cookbook Name:: my_lamp
-# Recipe:: pgsql
-#
-
 # レポジトリを追加 (PostgreSQL)
 # 参照: http://yum.postgresql.org/repopackages.php
 bash 'add-repo-pgsql' do
@@ -44,5 +39,4 @@ bash 'import-pgsql' do
   EOC
   #TODO: 既にインポート済みでも実行されてしまう。
   not_if 'psql -c "\l" | grep test'
-  only_if {node.git.user.email == 'toumin.m7@gmail.com'}
 end

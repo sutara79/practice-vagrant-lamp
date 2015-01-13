@@ -1,22 +1,7 @@
-#
-# Cookbook Name:: my_lamp
-# Recipe:: ruby
-#
-# dependency: make, wget
+# dependency: wget
 
-# Rubyをインストール
-bash 'add-ruby' do
-  user 'root'
-  code <<-EOC
-    wget ftp://ftp.ruby-lang.org/pub/ruby/#{node.ruby.version}.tar.gz
-    tar xvzf #{node.ruby.version}.tar.gz
-    cd #{node.ruby.version}
-    ./configure
-    make
-    make install
-  EOC
-  # not_if 'which ruby' # なぜかRubyをインストールできなかった
-  creates "/#{node.ruby.version}"
+package 'ruby' do
+  action :install
 end
 
 # Heroku Toolbeltをインストール
@@ -28,7 +13,6 @@ bash 'add-heroku-toolbelt' do
     echo 'PATH="/usr/local/heroku/bin:$PATH"' >> /etc/profile
     source /etc/profile
     sh install.sh
-    gem install foreman
   EOC
   not_if 'which heroku'
 end

@@ -6,7 +6,7 @@ Only for non-production environment.
 ## Environment
 ##### Virtual Machine
 - [CentOS 6.5 x86_64](https://github.com/2creatives/vagrant-centos/releases/tag/v6.5.3)
-- Apache (centos)
+- Apache
 - MySQL (mysql56-community)
 - PostgreSQL (pgdg94)
 - PHP (remi-php56)
@@ -16,15 +16,15 @@ Only for non-production environment.
   - Phalcon
 - Node.js (epel)
   - JSDoc
-- Git (ソース)
-- Ruby (ソース)
+- Git
+- Ruby
   - HerokuToolbelt
 
 ##### Host Machine
 - Windows 7 64bit
 - VirtualBox
 - Vagrant
-- Chef-solo >= 12.0
+- chef-client >= 12.0
 
 ## Note
 ホスト、ゲスト双方の共有フォルダを変更しています。
