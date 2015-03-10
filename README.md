@@ -5,7 +5,7 @@ Only for non-production environment.
 
 ## Environment
 ##### Virtual Machine
-- [CentOS 6.5 x86_64](https://github.com/2creatives/vagrant-centos/releases/tag/v6.5.3)
+- [CentOS 6.5 x86_64](//github.com/2creatives/vagrant-centos/releases/tag/v6.5.3)
 - Apache
 - MySQL (mysql56-community)
 - PostgreSQL (pgdg94)
@@ -25,10 +25,11 @@ Only for non-production environment.
 - VirtualBox
 - Vagrant
   - **DO NOT install plugin**: vagrant-berkshelf, vagrant-omnibus
+  - **public**_network: **192.168.1.100**
 - chef-client >= 12.0
 
 ## Author
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 
 ## License
-[MIT License](http://www.opensource.org/licenses/mit-license.php)
+[MIT License](//www.opensource.org/licenses/mit-license.php)
