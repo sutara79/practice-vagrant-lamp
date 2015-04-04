@@ -22,6 +22,7 @@ template '/etc/httpd/conf/httpd.conf' do
   mode '0644'
   variables(
     :allow_override => 'All', # for mod_rewrite
+    :directory_index => 'index.html index.php index.cgi',
     :enable_mmap => 'Off',
     :enable_sendfile => 'Off'
   )
