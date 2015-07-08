@@ -14,11 +14,11 @@ bash 'add_jsdoc' do
   not_if 'which jsdoc'
 end
 
-# npmでmochaをインストール
+# npmでmochaとchaiをインストール
 bash 'add_mocha' do
   user 'root'
   code <<-EOC
-    npm install -g mocha
+    npm install -g mocha chai
   EOC
   not_if 'which mocha'
 end

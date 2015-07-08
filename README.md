@@ -16,6 +16,8 @@ Only for non-production environment.
   - Phalcon
 - Node.js (epel)
   - JSDoc
+  - mocha
+  - chai
 - Git
 - Ruby
   - HerokuToolbelt
